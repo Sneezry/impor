@@ -1,6 +1,11 @@
 'use strict';
 
-export = function impor<T extends object>(id: string): T {
+import {join} from 'path';
+
+function impor<T extends object>(id: string, rootDir: string): T {
+  if (/^\./.test(id)) {
+    id = join(rootDir, id);
+  }
   let mod: T;
   return new Proxy((() => {}) as T, {
     apply: (_, thisArg, argumentsList) => {
@@ -52,4 +57,10 @@ export = function impor<T extends object>(id: string): T {
       return Reflect.setPrototypeOf(mod, value);
     }
   });
-};
+}
+
+export = (rootDir: string) => {
+  return (id: string) => {
+    return impor(id, rootDir);
+  };
+}
