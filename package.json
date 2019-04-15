@@ -1,10 +1,11 @@
 {
   "name": "impor",
-  "version": "0.0.2",
+  "version": "0.1.0-rc",
   "description": "Very lazy import to speed up VS Code extensions",
   "main": "out/index.js",
   "scripts": {
-    "build": "tsc -p ./"
+    "build": "tsc -p ./",
+    "prepublish": "tsc -p ./"
   },
   "repository": {
     "type": "git",
